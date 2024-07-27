@@ -12,7 +12,7 @@
             <a href="{% url 'post_list' %}" class="font-bold">My Blog</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'post_new' %}" class="ml-4">New Post</a>
-                <a href="{% url 'logout' %}" class="ml-4">Logout</a>
+                <a href="/logout" class="ml-4">Logout</a>
             {% else %}
                 <a href="{% url 'login' %}" class="ml-4">Login</a>
             {% endif %}
