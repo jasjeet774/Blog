@@ -62,3 +62,26 @@ def post_delete(request, pk):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+
+@login_required
+def like_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.user in post.dislikes.all():
+        post.dislikes.remove(request.user)
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    else:
+        post.likes.add(request.user)
+    return redirect('post_detail', pk=pk)
+
+@login_required
+def dislike_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)
+    if request.user in post.dislikes.all():
+        post.dislikes.remove(request.user)
+    else:
+        post.dislikes.add(request.user)
+    return redirect('post_detail', pk=pk)
